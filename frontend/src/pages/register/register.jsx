@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import Navbar from "../components/Navbar";
-import Container from "../components/container";
+import Navbar from "../../components/Navbar";
+import Container from "./components/container";
 
 export default function Register(){
     return (
