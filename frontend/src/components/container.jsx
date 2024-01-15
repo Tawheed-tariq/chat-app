@@ -1,7 +1,6 @@
 import { HStack, Stack, Text } from "@chakra-ui/react";
-import UserForm from './form'
-import AppDesc from "../../../components/AppDesc";
-export default function Container() {
+import AppDesc from "./AppDesc";
+export default function Container({children}) {
     return(
         <HStack
             p={{
@@ -19,7 +18,7 @@ export default function Container() {
             justify={'space-around'}
         >
             <AppDesc/>
-            <UserForm/>
+            {children}
         </HStack>
     )
 }

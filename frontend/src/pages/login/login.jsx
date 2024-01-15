@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
 import Container from "../../components/container";
-import UserForm from './components/form'
-export default function Register(){
-    return (
-        <Box 
+import LoginForm from "./components/loginForm";
+
+export default function Login() {
+    return(
+        <Box
             width={'100vw'}
             height={'100vh'}
         >
@@ -21,10 +22,9 @@ export default function Register(){
                 mx={'auto'}
             >
                 <Container>
-                    <UserForm/>
+                    <LoginForm/>
                 </Container>
             </Box>
-            
         </Box>
     )
 }

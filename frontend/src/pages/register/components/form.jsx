@@ -50,13 +50,13 @@ export default function UserForm(){
             )
             return false
         }
-        if(username.length < 3){
-            toast.error(
-                "length of username must be greater than 3",
-                toastOptions
-            )
-            return false
-        }
+        // if(username.length === ""){
+        //     toast.error(
+        //         "length of username must be greater than 3",
+        //         toastOptions
+        //     )
+        //     return false
+        // }
         if (password.length < 8) {
             toast.error(
               "Password should be equal or greater than 8 characters.",
@@ -196,7 +196,7 @@ export default function UserForm(){
                     </Field>
 
                     <Button type="submit" my={'20px'} width={'110px'} colorScheme="none" height={'40px'} borderRadius={'20px'} bg={'secondary'} color={'txt'}>
-                        Submit
+                        Register
                     </Button>
                 </Form>
             </Formik>
