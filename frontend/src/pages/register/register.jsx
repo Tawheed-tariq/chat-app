@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
 import Container from "../../components/container";
 import UserForm from './components/form'
+import AppDesc from "../../components/AppDesc";
 export default function Register(){
     return (
         <Box 
@@ -21,6 +22,7 @@ export default function Register(){
                 mx={'auto'}
             >
                 <Container>
+                    <AppDesc/>
                     <UserForm/>
                 </Container>
             </Box>

@@ -77,71 +77,68 @@ export default function LoginForm() {
         navigate('/')
     }, [])
 
-
-
     return (
         <Stack 
-        bg={'form'}
-        px={'30px'}
-        py={'20px'}
-        borderRadius={'22px'}
-        w={'100%'}
-        maxW={'545px'}
-    >
-        <Text fontSize={'32px'} fontWeight={'600'}>Login</Text>
+            bg={'form'}
+            px={'30px'}
+            py={'20px'}
+            borderRadius={'22px'}
+            w={'100%'}
+            maxW={'545px'}
+        >
+            <Text fontSize={'32px'} fontWeight={'600'}>Login</Text>
 
-        <Formik>
-            <Form 
-                onSubmit={(e) => handleSubmit(e)}
-            >
-                <Field name="username">
-                    {({field , form}) => (
-                        <FormControl>
-                            <FormLabel color={'txt'}>Username</FormLabel>
-                            <Input 
-                                {...field} 
-                                onChange={(e) => handleChange(e)}
-                                type='text' 
-                                textColor={'txt'} 
-                                borderRadius={{
-                                    base: '20px',
-                                    md: '30px'
-                                }} 
-                                bg={'input'} 
-                                border={'none'} 
-                            />
-                        </FormControl>
-                    )}
-                </Field>
+            <Formik>
+                <Form 
+                    onSubmit={(e) => handleSubmit(e)}
+                >
+                    <Field name="username">
+                        {({field , form}) => (
+                            <FormControl>
+                                <FormLabel color={'txt'}>Username</FormLabel>
+                                <Input 
+                                    {...field} 
+                                    onChange={(e) => handleChange(e)}
+                                    type='text' 
+                                    textColor={'txt'} 
+                                    borderRadius={{
+                                        base: '20px',
+                                        md: '30px'
+                                    }} 
+                                    bg={'input'} 
+                                    border={'none'} 
+                                />
+                            </FormControl>
+                        )}
+                    </Field>
 
-                    
-                <Field name="password" >
-                    {({field , form}) => (
-                        <FormControl>
-                            <FormLabel color={'txt'}>Password</FormLabel>
-                            <Input 
-                                {...field} 
-                                onChange={(e) => handleChange(e)}
-                                type='password' 
-                                textColor={'txt'} 
-                                borderRadius={{
-                                    base: '20px',
-                                    md: '30px'
-                                }} 
-                                bg={'input'} 
-                                border={'none'} 
-                            />
-                        </FormControl>
-                    )}
-                </Field>
+                        
+                    <Field name="password" >
+                        {({field , form}) => (
+                            <FormControl>
+                                <FormLabel color={'txt'}>Password</FormLabel>
+                                <Input 
+                                    {...field} 
+                                    onChange={(e) => handleChange(e)}
+                                    type='password' 
+                                    textColor={'txt'} 
+                                    borderRadius={{
+                                        base: '20px',
+                                        md: '30px'
+                                    }} 
+                                    bg={'input'} 
+                                    border={'none'} 
+                                />
+                            </FormControl>
+                        )}
+                    </Field>
 
-                <Button type="submit" my={'20px'} width={'110px'} colorScheme="none" height={'40px'} borderRadius={'20px'} bg={'secondary'} color={'txt'}>
-                    Login
-                </Button>
-            </Form>
-        </Formik>
-        <ToastContainer/>
-    </Stack>
-
+                    <Button type="submit" my={'20px'} width={'110px'} colorScheme="none" height={'40px'} borderRadius={'20px'} bg={'secondary'} color={'txt'}>
+                        Login
+                    </Button>
+                </Form>
+            </Formik>
+            <ToastContainer/>
+        </Stack>
     )
 }

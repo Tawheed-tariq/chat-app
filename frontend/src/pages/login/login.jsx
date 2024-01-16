@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
 import Container from "../../components/container";
 import LoginForm from "./components/loginForm";
+import AppDesc from "../../components/AppDesc";
 
 export default function Login() {
     return(
@@ -22,6 +23,7 @@ export default function Login() {
                 mx={'auto'}
             >
                 <Container>
+                    <AppDesc/>
                     <LoginForm/>
                 </Container>
             </Box>

@@ -1,8 +1,7 @@
-import { HStack, Stack, Text } from "@chakra-ui/react";
-import AppDesc from "./AppDesc";
+import {  Stack } from "@chakra-ui/react";
 export default function Container({children}) {
     return(
-        <HStack
+        <Stack
             p={{
                 base:'15px',
                 sm:'30px'
@@ -11,14 +10,13 @@ export default function Container({children}) {
             w={'100%'}
             borderRadius={'24px'}
             flexDir={{
-                base: 'column',
+                base: "column",
                 md: 'row'
             }}
             gap={'4'}
             justify={'space-around'}
         >
-            <AppDesc/>
             {children}
-        </HStack>
+        </Stack>
     )
 }
