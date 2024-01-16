@@ -1,6 +1,7 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import Register from './pages/register/register'
 import Login from './pages/login/login'
+import Chat from './pages/chat/chat'
 function App() {
 
   return (
@@ -8,6 +9,7 @@ function App() {
       <Routes>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/' element={<Chat/>}/>
       </Routes>
     </BrowserRouter>
   )

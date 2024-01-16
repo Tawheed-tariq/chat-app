@@ -55,21 +55,25 @@ export default function LoginForm() {
     }
 
     const handleSubmit = async (event) => {
-        event.preventDefault()
-        if(handleValidation()){
-            const {username , password } = values
-            const {data} = await axios.post(loginRoute, {
-                username,
-                password,
-            })
-            if(data.status === false){
-                toast.error(data.msg, toastOptions)
-            }
-            else{
-                localStorage.setItem("chat-app-user", JSON.stringify(data.info))
-                navigate('/')
-            }
-        }  
+        try {
+            event.preventDefault()
+            if(handleValidation()){
+                const {username , password } = values
+                const {data} = await axios.post(loginRoute, {
+                    username,
+                    password,
+                })
+                if(data.status === false){
+                    toast.error(data.msg, toastOptions)
+                }
+                else{
+                    localStorage.setItem("chat-app-user", JSON.stringify(data.myUser))
+                    navigate('/')
+                }
+            } 
+        } catch (error) {
+            console.log(error.message)
+        } 
     }
 
     useEffect(() =>{

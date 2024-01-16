@@ -1,5 +1,7 @@
-export default function ChatContainer() {
+export default function Contacts({contacts}) {
     return (
-        <></>
+        <>
+        contacts
+        </>
     )
 }

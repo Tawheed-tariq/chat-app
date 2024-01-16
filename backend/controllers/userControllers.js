@@ -71,3 +71,17 @@ module.exports.login = async (req, res, next) => {
         next(error)
     }
 }
+
+module.exports.allUsers = async (req, res, next) => {
+    try {
+        const userID = req.params.id
+        const users = await user.find({_id : {$ne : userID}}).select([
+            "email",
+            "username",
+            "_id"
+        ])
+        return res.json(users)
+    } catch (error) {
+        next(error)
+    }
+}
