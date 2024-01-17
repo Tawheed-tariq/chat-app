@@ -1,5 +1,5 @@
 import { Box, HStack, Icon, Stack, Text } from "@chakra-ui/react";
-import {FaUserAlt} from 'react-icons/fa'
+import UserIcon from './userIcon'
 export default function Navbar(){
     return(
         <Box
@@ -47,17 +47,7 @@ export default function Navbar(){
                         </Text>
                     </Stack>
                     
-                    <Stack 
-                        width={'40px'}
-                        height={'40px'}
-                        borderRadius={'50%'}
-                        bg={'primary'}
-                        ml={'auto'}
-                        justifyContent={'center'}
-                        alignItems={'center'}
-                    >
-                        <Icon as={FaUserAlt}/>
-                    </Stack>
+                    <UserIcon/>
                 </HStack>
             </HStack>
         </Box>

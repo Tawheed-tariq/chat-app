@@ -6,11 +6,12 @@ export const theme = extendTheme({
         secondary: '#0B6F93',
         container: 'rgba(49, 200, 254, 0.12)',
         form: 'rgba(11, 111, 147, 0.37)',
-        input: 'rgba(133, 209, 237, 0.72)'
+        input: 'rgba(133, 209, 237, 0.72)',
+        contacts: "rgba(133, 209, 237, 0.15)",
+        chat: 'rgba(11, 111, 147, 0.28)',
     },
     styles: {
         global: {
-          // styles for the `body`
           body: {
             bg: '#081A20',
           },

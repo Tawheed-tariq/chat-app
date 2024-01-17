@@ -6,6 +6,7 @@ import { useNavigate} from 'react-router-dom'
 import { useState, useEffect } from "react"
 import axios from 'axios'
 import {allUsersRoute} from "../../utils/ApiRoutes"
+import ChatContainer from "./componenets/chatContainer"
 
 
 
@@ -15,6 +16,7 @@ export default function Chat() {
     const navigate = useNavigate()
     const [currUsr, setCurrUsr] = useState()
     const [contacts, setContacts] = useState([])
+    const [currChat , setCurrChat] = useState(undefined)
 
 
     useEffect(() => {
@@ -34,7 +36,6 @@ export default function Chat() {
         getUser()
     }, [])
 
-
     useEffect(() => {
         const getContacts = async () => {
             try {
@@ -49,6 +50,9 @@ export default function Chat() {
         getContacts()
     }, [currUsr])
 
+    const handleChatChange = (chat) => {
+        setCurrChat(chat);
+    };
 
     return (
         <Box
@@ -69,7 +73,8 @@ export default function Chat() {
                 mx={'auto'}
             >
                 <Container>
-                    <Contacts contacts={contacts}/>
+                    <Contacts contacts={contacts} changeChat={setCurrChat}/>
+                    <ChatContainer currChat={currChat}/>
                 </Container>
             </Box>
         </Box>
