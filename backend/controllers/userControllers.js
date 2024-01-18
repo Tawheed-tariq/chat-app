@@ -85,3 +85,15 @@ module.exports.allUsers = async (req, res, next) => {
         next(error)
     }
 }
+
+module.exports.logout = async (req,res,next) => {
+    try {
+        const id = req.params.id
+        if(!id){
+            return res.json({msg : "please provide id"})
+        }
+        return res.status(200).send() 
+    } catch (error) {
+        next(error)
+    }
+}

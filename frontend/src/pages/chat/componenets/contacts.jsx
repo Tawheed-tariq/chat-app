@@ -6,17 +6,19 @@ import { useEffect, useState } from "react"
 export default function Contacts({contacts , changeChat}) {
 
     const [currSelected , setCurrSelected] = useState(undefined)
-    // const [currUser , setCurrUser] = useState(undefined)
-    // useEffect(() => {
-    //     const getCurrUser = async () => {
-    //         const data = await JSON.parse(localStorage.getItem("chat-app-user"))
-    //         setCurrUser(() => (
-    //             data.username
-    //         ))
-    //     }
-    //     getCurrUser()
-    // }, [])
+    const [currUsername , setCurrUsername] = useState(undefined)
 
+
+    
+    useEffect(() => {
+        const getCurrUser = async () => {
+            const data = await JSON.parse(localStorage.getItem("chat-app-user"))
+            setCurrUsername(() => (
+                data.username
+            ))
+        }
+        getCurrUser()
+    }, [])
 
     const changeCurrChat = (index, contact) => {
         setCurrSelected(index)

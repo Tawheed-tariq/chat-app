@@ -17,7 +17,7 @@ export default function Chat() {
     const [currUsr, setCurrUsr] = useState()
     const [contacts, setContacts] = useState([])
     const [currChat , setCurrChat] = useState(undefined)
-
+    
 
     useEffect(() => {
         const getUser = async () => {
@@ -53,7 +53,6 @@ export default function Chat() {
     const handleChatChange = (chat) => {
         setCurrChat(chat);
     };
-
     return (
         <Box
             width={'100vw'}
@@ -73,8 +72,8 @@ export default function Chat() {
                 mx={'auto'}
             >
                 <Container>
-                    <Contacts contacts={contacts} changeChat={setCurrChat}/>
-                    <ChatContainer currChat={currChat}/>
+                    <Contacts contacts={contacts} changeChat={handleChatChange} />
+                    <ChatContainer currChat={currChat} />
                 </Container>
             </Box>
         </Box>

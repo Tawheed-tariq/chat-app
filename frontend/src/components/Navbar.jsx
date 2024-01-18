@@ -1,7 +1,43 @@
 import { Box, HStack, Icon, Stack, Text } from "@chakra-ui/react";
 import UserIcon from './userIcon'
+import {useNavigate} from 'react-router-dom'
+import axios from "axios";
+import { logoutRoute } from "../utils/ApiRoutes";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
+
 export default function Navbar(){
+    const navigate = useNavigate()
+
+    const toastOptions = {
+        position: "top-right",
+        autoClose: 5000,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+    };
+
+    const handleClick = async () => {
+        try {
+            const id = await JSON.parse(localStorage.getItem("chat-app-user"))._id
+            const data = await axios.get(`${logoutRoute}/${id}`)
+            if(data.status === 200){
+                localStorage.clear()
+                navigate('/login')
+            }else{
+                toast.error(data.data.msg, toastOptions)
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+
+
     return(
+        <>
         <Box
             width={'100%'}
             bg={'inherit'}
@@ -41,6 +77,8 @@ export default function Navbar(){
                         borderRadius={'37px'}
                         align={'center'}
                         justify={'center'}
+                        cursor={'pointer'}
+                        onClick={handleClick}
                     >
                         <Text>
                             Logout
@@ -51,5 +89,7 @@ export default function Navbar(){
                 </HStack>
             </HStack>
         </Box>
+        <ToastContainer/>
+        </>
     )
 }
