@@ -23,7 +23,7 @@ export default function Chat() {
     useEffect(() => {
         if(currUsr){
             socket.current = io(host) //connects to server
-            socket.current.emit('add-usr', currUsr._id)
+            socket.current.emit('add-user', currUsr._id)
         }
     }, [currUsr])
 
