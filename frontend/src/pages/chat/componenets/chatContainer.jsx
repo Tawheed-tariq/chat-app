@@ -2,21 +2,7 @@ import { Box, HStack, Icon, Stack, Text, Textarea } from "@chakra-ui/react";
 import UserIcon from "../../../components/userIcon";
 import {MdOutlineSend} from 'react-icons/md'
 import Welcome from "../../../components/welcome";
-export default function ChatContainer({currChat }) {
-    // const [currUser , setCurrUser] = useState(undefined)
-
-
-
-    // useEffect(() => {
-    //     const getCurrUser = async () => {
-    //         const data = await JSON.parse(localStorage.getItem("chat-app-user"))
-    //         setCurrUser(() => (
-    //             data.username
-    //         ))
-    //     }
-    //     getCurrUser()
-    // }, [])
-
+export default function ChatContainer({currChat , socket}) {
 
 
     return (
@@ -37,6 +23,7 @@ export default function ChatContainer({currChat }) {
                 <Welcome />
                 : 
                 <>
+                {/* header */}
                 <HStack>
                     <UserIcon/>
                     <Stack
@@ -56,13 +43,16 @@ export default function ChatContainer({currChat }) {
                     </Stack>
                 </HStack>
 
+                {/* Chat messages */}
                 <Box
                     height={'100%'}
+                    w={'90%'}
+                    mx={'auto'}
                 >
-
+                    
                 </Box>
 
-
+                {/* chat input  */}
                 <HStack w={'100%'}>
                     <Box>
                         <UserIcon/>
