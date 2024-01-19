@@ -1,8 +1,63 @@
-import { Box, HStack, Icon, Stack, Text, Textarea } from "@chakra-ui/react";
+import { Box, HStack,  Stack, Text } from "@chakra-ui/react";
 import UserIcon from "../../../components/userIcon";
-import {MdOutlineSend} from 'react-icons/md'
+import axios from 'axios'
 import Welcome from "../../../components/welcome";
+import { useEffect, useState } from "react";
+import {recieveMessageRoute, sendMessageRoute} from '../../../utils/ApiRoutes'
+import ChatInput from "./chatInput";
+
+
+
+
+
 export default function ChatContainer({currChat , socket}) {
+
+    const [messages , setMessages] = useState([]);
+
+
+
+    useEffect(() => {
+        const getAllMessages = async () => {
+            try {
+                const user = await JSON.parse(localStorage.getItem("chat-app-user")) //get the data of sender
+                if(currChat != undefined){
+                    const response  = await axios.post(recieveMessageRoute, { //sends req to database to get all the message present in database
+                        from : user._id,
+                        to: currChat._id
+                    })
+                    setMessages(response.data)
+                }
+            } catch (error) {
+                console.log(error.message)
+            }
+        }
+        getAllMessages()
+    }, [currChat])
+
+    const handleSend = async (msg) => {
+        try {
+            const user = await JSON.parse(localStorage.getItem("chat-app-user"))
+
+            socket.current.emit('send-msg', { //sends message to other user
+                to: currChat._id,
+                from: user._id,
+                msg
+            })    
+
+            const {data} = await axios.post(sendMessageRoute, { //saves to database
+                from: user._id,
+                to: currChat._id,
+                message: msg
+            })   
+
+            console.log("done " + data.msg)     
+            const msgs = [...messages];
+            msgs.push({ fromSelf: true, message: msg });
+            setMessages(msgs);
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
 
 
     return (
@@ -53,22 +108,7 @@ export default function ChatContainer({currChat , socket}) {
                 </Box>
 
                 {/* chat input  */}
-                <HStack w={'100%'}>
-                    <Box>
-                        <UserIcon/>
-                    </Box>
-                    <Textarea w={'100%'} border={'none'} height={'50px'} color={'txt'} borderRadius={'25px'} bg={'input'} px={'4'} fontSize={'18px'} rows={1}></Textarea>
-                    <Stack
-                        height={'40px'}
-                        borderRadius={'20px'}
-                        bg={'secondary'}
-                        width={'80px'}
-                        alignItems={'center'}
-                        justifyContent={'center'}
-                    >
-                        <Icon as={MdOutlineSend}/>
-                    </Stack>
-                </HStack>
+                <ChatInput handleSend={handleSend}/>
                 </>
             }
         </Box>

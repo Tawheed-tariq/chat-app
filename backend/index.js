@@ -5,7 +5,7 @@ const port = process.env.PORT || 8080
 const cors = require('cors')
 const userRouter = require('./routers/userRoutes')
 const messageRouter = require('./routers/messageRoutes')
-const socket = require('socket.io')
+const {Server} = require('socket.io')
 require('./db/connection')
 
 /* Cross-origin resource sharing (CORS) is an extension of the 
@@ -29,12 +29,12 @@ const server = app.listen(port , (err) => {
 })
 
 
-const io = socket(server, {
-    cors: {
-        origin: 'http://localhost:5173/',
-        credentials: true
-    }
-})
+const io = new Server(server, {
+    cors:{
+      origin: "http://localhost:5173",
+      credentials: true
+    },
+});
 
 
 global.onlineUsers = new Map();
