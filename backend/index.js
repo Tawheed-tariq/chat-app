@@ -4,6 +4,8 @@ const app = express()
 const port = process.env.PORT || 8080
 const cors = require('cors')
 const userRouter = require('./routers/userRoutes')
+const messageRouter = require('./routers/messageRoutes')
+const socket = require('socket.io')
 require('./db/connection')
 
 /* Cross-origin resource sharing (CORS) is an extension of the 
@@ -16,9 +18,36 @@ app.use(express.json())
 
 
 app.use('/api/auth/' , userRouter)
+app.use('/api/messages/', messageRouter)
 
-app.listen(port , (err) => {
+
+
+const server = app.listen(port , (err) => {
     if(err)
         console.log(err.message)
     console.log("server running on port " + port)
 })
+
+
+const io = socket(server, {
+    cors: {
+        origin: 'http://localhost:5173/',
+        credentials: true
+    }
+})
+
+
+global.onlineUsers = new Map();
+io.on("connection", (socket) => {
+  global.chatSocket = socket;
+  socket.on("add-user", (userId) => {
+    onlineUsers.set(userId, socket.id);
+  });
+
+  socket.on("send-msg", (data) => {
+    const sendUserSocket = onlineUsers.get(data.to);
+    if (sendUserSocket) {
+      socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+    }
+  });
+});
