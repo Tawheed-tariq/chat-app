@@ -3,11 +3,11 @@ import Navbar from '../../components/Navbar'
 import Container from "../../components/container"
 import Contacts from './componenets/contacts'
 import { useNavigate} from 'react-router-dom'
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import axios from 'axios'
-import {allUsersRoute} from "../../utils/ApiRoutes"
+import {allUsersRoute, host} from "../../utils/ApiRoutes"
 import ChatContainer from "./componenets/chatContainer"
-
+import {io} from 'socket.io-client'
 
 
 
@@ -17,7 +17,17 @@ export default function Chat() {
     const [currUsr, setCurrUsr] = useState()
     const [contacts, setContacts] = useState([])
     const [currChat , setCurrChat] = useState(undefined)
-    
+    const socket = useRef() //useRef is a React Hook that lets you reference a value that’s not needed for rendering.
+
+
+    useEffect(() => {
+        if(currUsr){
+            socket.current = io(host) //connects to server
+            socket.current.emit('add-usr', currUsr._id)
+        }
+    }, [currUsr])
+
+
 
     useEffect(() => {
         const getUser = async () => {
@@ -73,7 +83,7 @@ export default function Chat() {
             >
                 <Container>
                     <Contacts contacts={contacts} changeChat={handleChatChange} />
-                    <ChatContainer currChat={currChat} />
+                    <ChatContainer currChat={currChat} socket={socket} />
                 </Container>
             </Box>
         </Box>

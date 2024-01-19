@@ -25,7 +25,6 @@ export default function Navbar(){
             const data = await axios.get(`${logoutRoute}/${id}`)
             if(data.status === 200){
                 localStorage.clear()
-                // toast.success("logged out successfully", toastOptions)
                 navigate('/login')
             }else{
                 toast.error(data.data.msg, toastOptions)
