@@ -12,7 +12,7 @@ export default function Login() {
         >
             <Navbar/>
             <Box
-                minH={'100%'}
+                minH={'680px'}
                 display={'flex'}
                 alignItems={'center'}
                 maxW={{

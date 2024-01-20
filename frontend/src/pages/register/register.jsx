@@ -6,7 +6,7 @@ import AppDesc from "../../components/AppDesc";
 export default function Register(){
     return (
         <Box 
-            width={'100vw'}
+            minH={'680px'}
             height={'100vh'}
         >
             <Navbar/>

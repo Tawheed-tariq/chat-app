@@ -20,6 +20,7 @@ export default function Chat() {
     const socket = useRef() //useRef is a React Hook that lets you reference a value that’s not needed for rendering.
 
 
+    //every time somone registers or comes to this chat section this hook joins the user to the socket
     useEffect(() => {
         if(currUsr){
             socket.current = io(host) //connects to server
@@ -29,6 +30,7 @@ export default function Chat() {
 
 
 
+    //gets the data of the current user
     useEffect(() => {
         const getUser = async () => {
             try {
@@ -46,6 +48,8 @@ export default function Chat() {
         getUser()
     }, [])
 
+
+    //gets all the contacts present in the database
     useEffect(() => {
         const getContacts = async () => {
             try {
@@ -60,6 +64,8 @@ export default function Chat() {
         getContacts()
     }, [currUsr])
 
+
+    
     const handleChatChange = (chat) => {
         setCurrChat(chat);
     };

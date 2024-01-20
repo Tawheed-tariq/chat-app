@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import {registerRoute} from '../../../utils/ApiRoutes'
 import {useNavigate} from 'react-router-dom'
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ChakraLink } from '@chakra-ui/react'
 
 
 
@@ -87,6 +89,8 @@ export default function UserForm(){
         }  
     }
 
+
+    //if user already present in local storage then navigates to chat section
     useEffect(() =>{
         if(localStorage.getItem("chat-app-user"))
         navigate('/')
@@ -197,6 +201,11 @@ export default function UserForm(){
                     </Button>
                 </Form>
             </Formik>
+            <Text>Already have an account  
+                <ChakraLink color={'primary'} px={'10px'} as={ReactRouterLink} to='/login'>
+                    Login
+                </ChakraLink>
+            </Text>
             <ToastContainer/>
         </Stack>
     )

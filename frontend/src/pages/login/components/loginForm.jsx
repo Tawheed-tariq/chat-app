@@ -6,7 +6,8 @@ import axios from 'axios'
 import {useNavigate} from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { loginRoute } from "../../../utils/ApiRoutes";
-
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { Link as ChakraLink } from '@chakra-ui/react'
 
 
 
@@ -76,6 +77,8 @@ export default function LoginForm() {
         } 
     }
 
+
+    //if user alredy present in localserver then navigates to chat section
     useEffect(() =>{
         if(localStorage.getItem("chat-app-user"))
         navigate('/')
@@ -142,6 +145,11 @@ export default function LoginForm() {
                     </Button>
                 </Form>
             </Formik>
+            <Text>Don`t have an account  
+                <ChakraLink color={'primary'} px={'10px'} as={ReactRouterLink} to='/register'>
+                    Create One
+                </ChakraLink>
+            </Text>
             <ToastContainer/>
         </Stack>
     )

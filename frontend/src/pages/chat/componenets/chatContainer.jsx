@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import {recieveMessageRoute, sendMessageRoute} from '../../../utils/ApiRoutes'
 import ChatInput from "./chatInput";
 import ChatHeader from "./chatHeader";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
 
 
@@ -17,12 +17,16 @@ export default function ChatContainer({currChat , socket}) {
     const [arrivalMessage, setArrivalMessage] = useState(null)
     const scrollRef = useRef()
 
+
+    //this hook uses a function which get all the preious messages of the current chat
     useEffect(() => {
         const getAllMessages = async () => {
             try {
-                const user = await JSON.parse(localStorage.getItem("chat-app-user")) //get the data of sender
+                //get the data of sender
+                const user = await JSON.parse(localStorage.getItem("chat-app-user")) 
                 if(currChat != undefined){
-                    const response  = await axios.post(recieveMessageRoute, { //sends req to database to get all the message present in database
+                    const response  = await axios.post(recieveMessageRoute, { 
+                        //sends req to database to get all the message present in database
                         from : user._id,
                         to: currChat._id
                     })
@@ -35,28 +39,35 @@ export default function ChatContainer({currChat , socket}) {
         getAllMessages()
     }, [currChat])
 
-    // useEffect(() => {
-    //     const getCurrentChat = async () => {
-    //       if (currentChat) {
-    //         await JSON.parse(
-    //           localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-    //         )._id;
-    //       }
-    //     };
-    //     getCurrentChat();
-    // }, [currChat]);
 
+    //...
+    useEffect(() => {
+        const getCurrentChat = async () => {
+          if (currChat) {
+            await JSON.parse(
+              localStorage.getItem("chat-app-user")
+            )._id;
+          }
+        };
+        getCurrentChat();
+    }, [currChat]);
+
+
+
+    //this function is used to send messages to the other user 
     const handleSend = async (msg) => {
         try {
             const user = await JSON.parse(localStorage.getItem("chat-app-user"))
 
-            socket.current.emit('send-msg', { //sends message to other user
+            socket.current.emit('send-msg', { 
+                //sends message to other user
                 to: currChat._id,
                 from: user._id,
                 msg
             })    
 
-            await axios.post(sendMessageRoute, { //saves to database
+            await axios.post(sendMessageRoute, { 
+                //saves to database
                 from: user._id,
                 to: currChat._id,
                 message: msg
@@ -70,6 +81,9 @@ export default function ChatContainer({currChat , socket}) {
         }
     }
 
+
+
+    //recieves message from the server which is sent by some other user
     useEffect(() => {
         if(socket.current){
             socket.current.on("msg-recieve", (msg) => {
@@ -78,11 +92,15 @@ export default function ChatContainer({currChat , socket}) {
         }
     }, [])
 
+
+    //adds the new message to the message which is then showed to the user
     useEffect(() => {
         arrivalMessage && setMessages(prev => [...prev , arrivalMessage])
     }, [arrivalMessage])
 
 
+
+     //this is used to scroll down whenever a new message arrives
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages])
