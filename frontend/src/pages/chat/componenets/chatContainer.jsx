@@ -39,7 +39,7 @@ export default function ChatContainer({currChat , socket}) {
     //     const getCurrentChat = async () => {
     //       if (currentChat) {
     //         await JSON.parse(
-    //           localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+    //           localStorage.getItem("chat-app-user")
     //         )._id;
     //       }
     //     };
