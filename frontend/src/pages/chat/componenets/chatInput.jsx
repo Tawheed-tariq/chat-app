@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, HStack, Icon, Input, Stack } from "@chakra-ui/react";
+import { Box, FormControl, HStack, Icon, Input, Stack } from "@chakra-ui/react";
 import { MdOutlineSend } from "react-icons/md";
 import UserIcon from "../../../components/userIcon";
 import { useState } from "react";
@@ -8,9 +8,11 @@ export default function ChatInput({handleSend}) {
     const [msg , setMsg] = useState("")
 
 
+
     const handleChange = (e) => {
         setMsg(e.target.value)
     }
+
 
     const handelSubmit = () => {
         if(msg.length > 0){

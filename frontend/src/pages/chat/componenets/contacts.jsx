@@ -9,7 +9,7 @@ export default function Contacts({contacts , changeChat}) {
     const [currUsername , setCurrUsername] = useState(undefined)
 
 
-    
+    //gets the data of current user
     useEffect(() => {
         const getCurrUser = async () => {
             const data = await JSON.parse(localStorage.getItem("chat-app-user"))
