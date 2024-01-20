@@ -22,7 +22,7 @@ export default function ChatInput({handleSend}) {
 
 
     return(
-        <HStack w={'100%'}>
+        <HStack height={'70px'} w={'100%'}>
             <Box>
                 <UserIcon/>
             </Box>

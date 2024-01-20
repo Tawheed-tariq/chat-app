@@ -9,6 +9,7 @@ export const theme = extendTheme({
         input: 'rgba(133, 209, 237, 0.72)',
         contacts: "rgba(133, 209, 237, 0.15)",
         chat: 'rgba(11, 111, 147, 0.28)',
+        msg: 'rgba(133, 209, 237, 0.53)'
     },
     styles: {
         global: {

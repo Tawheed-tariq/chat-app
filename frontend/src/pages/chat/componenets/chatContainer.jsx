@@ -1,10 +1,11 @@
-import { Box, HStack,  Stack, Text } from "@chakra-ui/react";
-import UserIcon from "../../../components/userIcon";
+import { Box, HStack, Text } from "@chakra-ui/react";
 import axios from 'axios'
 import Welcome from "../../../components/welcome";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {recieveMessageRoute, sendMessageRoute} from '../../../utils/ApiRoutes'
 import ChatInput from "./chatInput";
+import ChatHeader from "./chatHeader";
+import { v4 as uuidv4 } from "uuid";
 
 
 
@@ -13,8 +14,8 @@ import ChatInput from "./chatInput";
 export default function ChatContainer({currChat , socket}) {
 
     const [messages , setMessages] = useState([]);
-
-
+    const [arrivalMessage, setArrivalMessage] = useState(null)
+    const scrollRef = useRef()
 
     useEffect(() => {
         const getAllMessages = async () => {
@@ -34,6 +35,17 @@ export default function ChatContainer({currChat , socket}) {
         getAllMessages()
     }, [currChat])
 
+    // useEffect(() => {
+    //     const getCurrentChat = async () => {
+    //       if (currentChat) {
+    //         await JSON.parse(
+    //           localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+    //         )._id;
+    //       }
+    //     };
+    //     getCurrentChat();
+    // }, [currChat]);
+
     const handleSend = async (msg) => {
         try {
             const user = await JSON.parse(localStorage.getItem("chat-app-user"))
@@ -44,13 +56,12 @@ export default function ChatContainer({currChat , socket}) {
                 msg
             })    
 
-            const {data} = await axios.post(sendMessageRoute, { //saves to database
+            await axios.post(sendMessageRoute, { //saves to database
                 from: user._id,
                 to: currChat._id,
                 message: msg
             })   
 
-            console.log("done " + data.msg)     
             const msgs = [...messages];
             msgs.push({ fromSelf: true, message: msg });
             setMessages(msgs);
@@ -59,6 +70,22 @@ export default function ChatContainer({currChat , socket}) {
         }
     }
 
+    useEffect(() => {
+        if(socket.current){
+            socket.current.on("msg-recieve", (msg) => {
+                setArrivalMessage({fromSelf: false, message : msg})
+            })
+        }
+    }, [])
+
+    useEffect(() => {
+        arrivalMessage && setMessages(prev => [...prev , arrivalMessage])
+    }, [arrivalMessage])
+
+
+    useEffect(() => {
+        scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages])
 
     return (
         <Box
@@ -79,31 +106,36 @@ export default function ChatContainer({currChat , socket}) {
                 : 
                 <>
                 {/* header */}
-                <HStack>
-                    <UserIcon/>
-                    <Stack
-                        width={{
-                            base: '100px',
-                            sm: '150px'
-                        }}
-                        height={'40px'}
-                        bg={'secondary'}
-                        borderRadius={'37px'}
-                        align={'center'}
-                        justify={'center'}
-                    >
-                        <Text >
-                            {currChat.username}
-                        </Text>
-                    </Stack>
-                </HStack>
+                <ChatHeader username={currChat.username}/>
 
                 {/* Chat messages */}
                 <Box
-                    height={'100%'}
+                    height={'500px'}
                     w={'90%'}
                     mx={'auto'}
+                    overflow={'scroll'}
+                    display={'flex'}
+                    flexDir={'column'}
                 >
+                    {
+                        messages.map((message, index) => {
+                            return (
+                                <HStack 
+                                    className={message.fromSelf ? 'sended' : 'recieved'}
+                                    m={'10px'} 
+                                    px={'15px'} 
+                                    py={'7px'} 
+                                    borderRadius={'15px'} 
+                                    maxW={'350px'} 
+                                    bg={'msg'} 
+                                    ref={scrollRef} 
+                                    key={index}
+                                >
+                                    <Text >{message.message}</Text>
+                                </HStack>
+                            )
+                        })
+                    }
                     
                 </Box>
 
