@@ -1,4 +1,4 @@
-import {Box} from "@chakra-ui/react"
+import {Box, useMediaQuery} from "@chakra-ui/react"
 import Navbar from '../../components/Navbar'
 import Container from "../../components/container"
 import Contacts from './componenets/contacts'
