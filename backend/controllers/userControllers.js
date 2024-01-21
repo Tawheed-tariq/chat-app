@@ -92,6 +92,7 @@ module.exports.logout = async (req,res,next) => {
         if(!id){
             return res.json({msg : "please provide id"})
         }
+        onlineUsers.delete(id)
         return res.status(200).send() 
     } catch (error) {
         next(error)
