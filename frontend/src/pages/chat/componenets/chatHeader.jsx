@@ -1,15 +1,15 @@
-import { HStack, Stack, Text } from "@chakra-ui/react";
+import { Box, HStack, Stack, Text } from "@chakra-ui/react";
 import UserIcon from "../../../components/userIcon";
 
 export default function ChatHeader({username}){
     return(
         <HStack>
-            <UserIcon/>
+            <Box>
+                <UserIcon/>
+            </Box>
             <Stack
-                width={{
-                    base: '100px',
-                    sm: '150px'
-                }}
+                width={'100%'}
+                px={'20px'}
                 height={'40px'}
                 bg={'secondary'}
                 borderRadius={'37px'}

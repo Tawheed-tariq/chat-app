@@ -113,7 +113,10 @@ export default function ChatContainer({currChat , socket}) {
             alignItems={'flex-start'}
             display={'flex'}
             flexDir={'column'}
-            px={'5'}
+            px={{
+                base: '2',
+                md: '5'
+            }}
             py={'3'}
             borderRadius={'25px'}
             justifyContent={'space-between'}
@@ -129,7 +132,10 @@ export default function ChatContainer({currChat , socket}) {
                 {/* Chat messages */}
                 <Box
                     height={'500px'}
-                    w={'90%'}
+                    w={{
+                        base: '100%',
+                        md: '90%'
+                    }}
                     mx={'auto'}
                     overflow={'scroll'}
                     display={'flex'}
@@ -144,12 +150,20 @@ export default function ChatContainer({currChat , socket}) {
                                     px={'15px'} 
                                     py={'7px'} 
                                     borderRadius={'15px'} 
-                                    maxW={'350px'} 
+                                    maxW={{
+                                        base: '200px',
+                                        md: '350px'
+                                    }} 
                                     bg={'msg'} 
                                     ref={scrollRef} 
                                     key={index}
                                 >
-                                    <Text >{message.message}</Text>
+                                    <Text
+                                        fontSize={{
+                                            base: '16px',
+                                            md: '18px'
+                                        }}
+                                    >{message.message}</Text>
                                 </HStack>
                             )
                         })
