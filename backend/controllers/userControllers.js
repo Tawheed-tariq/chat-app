@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 module.exports.register = async (req, res, next) => {
     try {
         const {username, email , password} = req.body
-        
+
         const checkUsername = await user.findOne({username})
         if(checkUsername){
             return res.json({
@@ -44,7 +44,7 @@ module.exports.register = async (req, res, next) => {
 module.exports.login = async (req, res, next) => {
     try {
         const {username,password} = req.body
-        
+
         const myUser = await user.findOne({username})
         if(!myUser){
             return res.json({

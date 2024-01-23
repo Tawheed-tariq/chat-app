@@ -8,7 +8,6 @@ export default function Contacts({contacts , changeChat}) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = useRef()
 
-
     const [currSelected , setCurrSelected] = useState(undefined)
     const [currUsername , setCurrUsername] = useState(undefined)
 
