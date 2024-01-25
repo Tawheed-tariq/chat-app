@@ -71,7 +71,7 @@ export default function ChatInput({handleSend}) {
                     type='text' 
                     textColor={'txt'} 
                     borderRadius={'25px'} 
-                    bg={'input'} 
+                    bg={'boxSmall'} 
                     border={'none'}
                     height={'50px'} 
                     fontSize={'18px'}

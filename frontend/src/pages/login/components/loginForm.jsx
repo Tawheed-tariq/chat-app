@@ -86,7 +86,7 @@ export default function LoginForm() {
 
     return (
         <Stack 
-            bg={'form'}
+            bg={'boxMedium'}
             px={'30px'}
             py={'20px'}
             borderRadius={'22px'}
@@ -112,7 +112,7 @@ export default function LoginForm() {
                                         base: '20px',
                                         md: '30px'
                                     }} 
-                                    bg={'input'} 
+                                    bg={'boxSmall'} 
                                     border={'none'} 
                                 />
                             </FormControl>
@@ -133,7 +133,7 @@ export default function LoginForm() {
                                         base: '20px',
                                         md: '30px'
                                     }} 
-                                    bg={'input'} 
+                                    bg={'boxSmall'} 
                                     border={'none'} 
                                 />
                             </FormControl>

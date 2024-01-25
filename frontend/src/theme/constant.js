@@ -5,11 +5,8 @@ export const theme = extendTheme({
         primary: '#31C8FE',
         secondary: '#0B6F93',
         container: 'rgba(49, 200, 254, 0.12)',
-        form: 'rgba(11, 111, 147, 0.37)',
-        input: 'rgba(133, 209, 237, 0.72)',
-        contacts: "rgba(133, 209, 237, 0.15)",
-        chat: 'rgba(11, 111, 147, 0.28)',
-        msg: 'rgba(133, 209, 237, 0.53)'
+        boxMedium: 'rgba(11, 111, 147, 0.37)',
+        boxSmall: 'rgba(133, 209, 237, 0.33)'
     },
     styles: {
         global: {

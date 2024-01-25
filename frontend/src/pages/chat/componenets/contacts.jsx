@@ -33,7 +33,7 @@ export default function Contacts({contacts , changeChat}) {
 
         {/* here rendering this when is desktop and rendering the drawer when in mobile or tablet */}
             <Box
-                bg={'contacts'}
+                bg={'boxSmall'}
                 display={{
                     base: 'none',
                     md: 'flex'
@@ -50,7 +50,7 @@ export default function Contacts({contacts , changeChat}) {
                         <Stack 
                             onClick={() => (changeCurrChat(index, contact))} 
                             cursor={'pointer'} 
-                            bg={currSelected === index ? 'secondary' : 'form' } 
+                            bg={currSelected === index ? 'secondary' : 'boxMedium' } 
                             px={'30px'} 
                             py={'15px'} 
                             borderRadius={'35px'} 
@@ -112,7 +112,7 @@ export default function Contacts({contacts , changeChat}) {
     
                 <DrawerBody>
                     <Box
-                        bg={'contacts'}
+                        bg={'boxSmall'}
                         display={'flex'}
                         flexDir={'column'}
                         alignItems={'flex-start'}

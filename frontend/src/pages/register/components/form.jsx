@@ -98,7 +98,7 @@ export default function UserForm(){
 
     return (
         <Stack 
-            bg={'form'}
+            bg={'boxMedium'}
             px={'30px'}
             py={'20px'}
             borderRadius={'22px'}
@@ -124,7 +124,7 @@ export default function UserForm(){
                                         base: '20px',
                                         md: '30px'
                                     }} 
-                                    bg={'input'} 
+                                    bg={'boxSmall'} 
                                     border={'none'} 
                                     // placeholder="password"
                                 />
@@ -145,7 +145,7 @@ export default function UserForm(){
                                         base: '20px',
                                         md: '30px'
                                     }} 
-                                    bg={'input'} 
+                                    bg={'boxSmall'} 
                                     border={'none'} 
                                     // placeholder="password"
                                 />
@@ -166,7 +166,7 @@ export default function UserForm(){
                                         base: '20px',
                                         md: '30px'
                                     }} 
-                                    bg={'input'} 
+                                    bg={'boxSmall'} 
                                     border={'none'} 
                                     // placeholder="password"
                                 />
@@ -188,7 +188,7 @@ export default function UserForm(){
                                         base: '20px',
                                         md: '30px'
                                     }} 
-                                    bg={'input'} 
+                                    bg={'boxSmall'} 
                                     border={'none'} 
                                     // placeholder="password"
                                 />

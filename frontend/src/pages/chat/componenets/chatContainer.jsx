@@ -106,7 +106,7 @@ export default function ChatContainer({currChat , socket}) {
     return (
         <Box
             minH={'680px'}
-            bg={'chat'}
+            bg={'boxMedium'}
             w={'100%'}
             alignItems={'flex-start'}
             display={'flex'}
@@ -152,7 +152,7 @@ export default function ChatContainer({currChat , socket}) {
                                         base: '200px',
                                         md: '350px'
                                     }} 
-                                    bg={'msg'} 
+                                    bg={'boxSmall'} 
                                     ref={scrollRef} 
                                     key={index}
                                 >
