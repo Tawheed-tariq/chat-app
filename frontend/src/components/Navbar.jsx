@@ -85,7 +85,9 @@ export default function Navbar(){
                         </Text>
                     </Stack>
                     
-                    <UserIcon/>
+                    <Box cursor={'pointer'} onClick={() => {navigate('/profile')}}>
+                        <UserIcon/>
+                    </Box>
                 </HStack>
             </HStack>
         </Box>
