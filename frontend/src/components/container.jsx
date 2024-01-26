@@ -1,7 +1,8 @@
 import {  Stack } from "@chakra-ui/react";
-export default function Container({children}) {
+export default function Container({children, minheight}) {
     return(
         <Stack
+            minHeight={minheight}
             p={{
                 base:'15px',
                 sm:'30px'
