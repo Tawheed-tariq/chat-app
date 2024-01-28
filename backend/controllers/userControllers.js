@@ -98,3 +98,35 @@ module.exports.logout = async (req,res,next) => {
         next(error)
     }
 }
+
+module.exports.editProfile = async (req, res, next) => {
+    try {
+        const {username, email, _id} = req.body
+
+        const checkUsername = await user.findOne({username, _id : {$ne : _id}})
+        if(checkUsername){
+            return res.json({
+                msg: "Username already exists",
+                status: false
+            })
+        }
+
+        const checkEmail = await user.findOne({email, _id : {$ne : _id}})
+        if(checkEmail){
+            return res.json({
+                msg: "email already exists",
+                status: false
+            })
+        }
+
+        // const info = await 
+
+        // return res.json({
+        //     status: true,
+        //     info
+        // })
+
+    } catch (error) {
+        next(error)
+    }
+}
