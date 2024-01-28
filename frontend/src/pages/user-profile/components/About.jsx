@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import {FiEdit3} from "react-icons/fi"
 import {IoMdClose, IoMdCheckmark} from "react-icons/io"
 import {editProfile} from "../../../utils/ApiRoutes"
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const Info = ({header, headerInfo, fontSize, handleSubmit, setValue}) => {
     const [isEditing, setIsEditing] = useState(false)
@@ -57,17 +62,35 @@ const Info = ({header, headerInfo, fontSize, handleSubmit, setValue}) => {
 
 
 export default function About(){
+    const navigate = useNavigate()
     const [details , setDetails]  = useState({})
     const [values , setValues] = useState({})
+
+
+    const toastOptions = {
+        position: "top-right",
+        autoClose: 5000,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+    };
+
+    
     useEffect(() => {
         const getUserInfo = async () => {
-            const data = await JSON.parse(localStorage.getItem('chat-app-user'))
-            setDetails(prev => (prev = data))
-            setValues(prev => (prev = data))
+            try {
+                const data = await JSON.parse(localStorage.getItem('chat-app-user'))
+                if(!data){
+                    navigate('/login')
+                }
+                setDetails(prev => (prev = data))
+                setValues(prev => (prev = data))
+            } catch (error) {
+                console.log(error.message)
+            }
         }
         getUserInfo()
     }, [])
-    
     const handleChange = (e) => {
         setValues({
             ...values,
@@ -85,8 +108,11 @@ export default function About(){
                 email
             })
             if(data.status === false){
-                console.log(data.msg)
+                toast.error(data.msg, toastOptions)
                 return false
+            }else{
+                localStorage.setItem('chat-app-user', JSON.stringify(data.info))
+                setDetails(prev => prev = data.info)
             }
         } catch (error) {
             console.log(error.message)
@@ -112,9 +138,10 @@ export default function About(){
             <Info 
                 header={'Bio'} 
                 handleSubmit={handleSubmit}
-                headerInfo={'A developer with passion of technology and creativity'} 
+                headerInfo={details.bio} 
                 fontSize={'18px'} 
             />
+            <ToastContainer/>
         </VStack>
     )
 }

@@ -18,6 +18,10 @@ const UserSchema = new mongoose.Schema({
         required: true,
         min: 8,
       },
+      bio: {
+        type: String,
+        default: "add bio"
+      }
 })
 
 module.exports = mongoose.model("User", UserSchema)

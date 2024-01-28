@@ -101,9 +101,10 @@ module.exports.logout = async (req,res,next) => {
 
 module.exports.editProfile = async (req, res, next) => {
     try {
-        const {username, email, _id} = req.body
+        const {username, email} = req.body
+        const id = req.params.id
 
-        const checkUsername = await user.findOne({username, _id : {$ne : _id}})
+        const checkUsername = await user.findOne({username, _id : {$ne : id}})
         if(checkUsername){
             return res.json({
                 msg: "Username already exists",
@@ -111,7 +112,7 @@ module.exports.editProfile = async (req, res, next) => {
             })
         }
 
-        const checkEmail = await user.findOne({email, _id : {$ne : _id}})
+        const checkEmail = await user.findOne({email, _id : {$ne : id}})
         if(checkEmail){
             return res.json({
                 msg: "email already exists",
@@ -119,13 +120,16 @@ module.exports.editProfile = async (req, res, next) => {
             })
         }
 
-        // const info = await 
-
-        // return res.json({
-        //     status: true,
-        //     info
-        // })
-
+        const info = await user.findByIdAndUpdate(id, {
+            $set : {
+                username,
+                email
+            }
+        }, {new : true})
+        return res.json({
+            status: true,
+            info
+        })
     } catch (error) {
         next(error)
     }
