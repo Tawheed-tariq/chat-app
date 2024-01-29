@@ -24,9 +24,20 @@ const Info = ({header, headerInfo, fontSize, handleSubmit, setValue}) => {
     
     return( 
         <Box
-            width={'500px'}
+            width={{
+                base: '100%',
+                md: '500px'
+            }}
         >
-            <Text color={'primary'}>{header}</Text>
+            <Text 
+                color={'primary'} 
+                fontSize={{
+                    base: '20px',
+                    md: 'auto'
+                }}
+            >
+                {header}
+            </Text>
             <HStack
                 width={'100%'}
                 justifyContent={'space-between'}
@@ -47,7 +58,7 @@ const Info = ({header, headerInfo, fontSize, handleSubmit, setValue}) => {
 
                 {
                 isEditing ? 
-                    <HStack ml={'10px'} alignSelf={'flex-end'} size='sm'>
+                    <HStack ml={'10px'} alignSelf={'flex-end'}>
                         <Icon onClick={submit} cursor={'pointer'} textColor={'primary'} as={IoMdCheckmark}  />
                         <Icon onClick={() => {setIsEditing(prev =>  (prev = !prev))}} cursor={'pointer'}  textColor={'primary'} as={IoMdClose}  />
                     </HStack>
@@ -120,26 +131,35 @@ export default function About(){
     }
     
     return (
-        <VStack spacing={'4'}>
+        <VStack width={'80%'} spacing={'4'}>
             <Info 
                 header="Username" 
                 setValue={handleChange}
                 handleSubmit={handleSubmit}
                 headerInfo={details.username} 
-                fontSize={'32px'} 
+                fontSize={{
+                    base: '24px',
+                    md: '34px'
+                }} 
             />
             <Info 
                 header={'Email'} 
                 setValue={handleChange}
                 handleSubmit={handleSubmit}
                 headerInfo={details.email} 
-                fontSize={'24px'} 
+                fontSize={{
+                    base: '18px',
+                    md: '24px'
+                }} 
             />
             <Info 
                 header={'Bio'} 
                 handleSubmit={handleSubmit}
                 headerInfo={details.bio} 
-                fontSize={'18px'} 
+                fontSize={{
+                    base: '14px',
+                    md: '18px'
+                }} 
             />
             <ToastContainer/>
         </VStack>

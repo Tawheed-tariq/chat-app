@@ -30,16 +30,34 @@ export default function Profile(){
             >
                 <Container minheight={'calc(100vh - 100px)'} >
                     <VStack
-                        width={'700px'}
+                        width={{
+                            base: '90%',
+                            sm: '90%',
+                            md: '700px'
+                        }}
+                        alignSelf={'center'}
                     >
                         <HStack
                             width={'100%'}
                             justifyContent={'center'}
                             position={'relative'}
                         >
-                                <Icon onClick={() => {navigate('/')}} fontSize={'32px'} position={'absolute'} left={'0'} cursor={'pointer'} as={IoIosArrowBack}/>
+                                <Icon 
+                                    onClick={() => {navigate('/')}} 
+                                    fontSize={{
+                                        base: '24px',
+                                        md: '34px'
+                                    }} 
+                                    position={'absolute'} 
+                                    left={'0'} 
+                                    cursor={'pointer'} 
+                                    as={IoIosArrowBack}
+                                />
                             <Text
-                                fontSize={'48px'}
+                                fontSize={{
+                                    base: '34px',
+                                    md: '48px'
+                                }}
                                 fontWeight={'900'}
                             >
                                 Your Profile

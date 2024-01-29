@@ -5,15 +5,35 @@ export default function ProfilePic(){
     return (
             <Stack 
                 my={'50px'}
-                width={'200px'}
+                width={{
+                    base: '100px',
+                    sm: '150px',
+                    md: '200px'
+                }}
                 alignSelf={'center'}
-                height={'200px'}
+                height={{
+                    base: '100px',
+                    sm: '150px',
+                    md: '200px'
+                }}
                 borderRadius={'50%'}
                 bg={'primary'}
                 justifyContent={'center'}
                 alignItems={'center'}
             >
-                <Icon width={'100px'} height={'100px'} as={FaUserAlt}/>
+                <Icon 
+                    width={{
+                        base: '40px',
+                        sm: '50px',
+                        md: '100px'
+                    }} 
+                    height={{
+                        base: '60px',
+                        sm: '80px',
+                        md: '100px'
+                    }} 
+                    as={FaUserAlt}
+                />
             </Stack>
     )
 }
