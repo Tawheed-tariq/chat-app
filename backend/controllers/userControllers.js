@@ -101,7 +101,7 @@ module.exports.logout = async (req,res,next) => {
 
 module.exports.editProfile = async (req, res, next) => {
     try {
-        const {username, email} = req.body
+        const {username, email, bio} = req.body
         const id = req.params.id
 
         const checkUsername = await user.findOne({username, _id : {$ne : id}})
@@ -119,11 +119,18 @@ module.exports.editProfile = async (req, res, next) => {
                 status: false
             })
         }
-
+        const bioLength = bio.length
+        if(bioLength > 50){
+            return res.json({
+                msg: "Bio cannot exceed 50 characters",
+                status: false
+            })
+        }
         const info = await user.findByIdAndUpdate(id, {
             $set : {
                 username,
-                email
+                email,
+                bio
             }
         }, {new : true})
         return res.json({

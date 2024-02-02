@@ -59,11 +59,11 @@ const Info = ({header, headerInfo, fontSize, handleSubmit, setValue}) => {
                 {
                 isEditing ? 
                     <HStack ml={'10px'} alignSelf={'flex-end'}>
-                        <Icon onClick={submit} cursor={'pointer'} textColor={'primary'} as={IoMdCheckmark}  />
-                        <Icon onClick={() => {setIsEditing(prev =>  (prev = !prev))}} cursor={'pointer'}  textColor={'primary'} as={IoMdClose}  />
+                        <Icon onClick={submit} cursor={'pointer'} _hover={{textColor: 'secondary'}} textColor={'primary'} as={IoMdCheckmark}  />
+                        <Icon onClick={() => {setIsEditing(prev =>  (prev = !prev))}} cursor={'pointer'}  _hover={{textColor: 'secondary'}} textColor={'primary'} as={IoMdClose}  />
                     </HStack>
                     : 
-                    <Icon onClick={() => {setIsEditing(prev =>  (prev = !prev))}} cursor={'pointer'} alignSelf={'flex-end'} textColor={'primary'} as={FiEdit3} />
+                    <Icon _hover={{textColor: 'secondary'}} textColor={'primary'} onClick={() => {setIsEditing(prev =>  (prev = !prev))}} cursor={'pointer'} alignSelf={'flex-end'} as={FiEdit3} />
                 }
                 
             </HStack>
@@ -112,19 +112,20 @@ export default function About(){
 
     const handleSubmit = async () => {
         try {
-            const {username , email, _id} = values
+            const {username , email,bio, _id} = values
             const {data} = await axios.put(`${editProfile}/${_id}`, {
                 _id,
                 username,
-                email
+                email,
+                bio
             })
             if(data.status === false){
                 toast.error(data.msg, toastOptions)
                 return false
-            }else{
-                localStorage.setItem('chat-app-user', JSON.stringify(data.info))
-                setDetails(prev => prev = data.info)
             }
+            localStorage.setItem('chat-app-user', JSON.stringify(data.info))
+            setDetails(prev => prev = data.info)
+            return true
         } catch (error) {
             console.log(error.message)
         }
@@ -154,6 +155,7 @@ export default function About(){
             />
             <Info 
                 header={'Bio'} 
+                setValue={handleChange}
                 handleSubmit={handleSubmit}
                 headerInfo={details.bio} 
                 fontSize={{

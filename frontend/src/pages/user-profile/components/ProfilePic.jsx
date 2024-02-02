@@ -20,6 +20,9 @@ export default function ProfilePic(){
                 bg={'primary'}
                 justifyContent={'center'}
                 alignItems={'center'}
+                // _hover={{
+                //     bg: '#000'
+                // }}
             >
                 <Icon 
                     width={{
