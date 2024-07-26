@@ -68,8 +68,8 @@ export default function LoginForm() {
                     toast.error(data.msg, toastOptions)
                 }
                 else{
-                    localStorage.setItem("chat-app-user", JSON.stringify(data.myUser))
-                    navigate('/')
+                    localStorage.setItem("chat-app-user", JSON.stringify(data.username))
+                    navigate('/dashboard')
                 }
             } 
         } catch (error) {
@@ -81,7 +81,7 @@ export default function LoginForm() {
     //if user alredy present in localserver then navigates to chat section
     useEffect(() =>{
         if(localStorage.getItem("chat-app-user"))
-        navigate('/')
+        navigate('/dashboard')
     }, [])
 
     return (
